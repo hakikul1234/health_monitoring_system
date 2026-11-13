@@ -1,0 +1,56 @@
+{
+    "anomaly_threshold": 0.5889088797459174,
+    "artifact_filename": "isolation_forest_v1.0.0.joblib",
+    "artifact_sha256": "5c389a7f801be0e737df59e49567e080ef03ca9ee5fe5b355d53eb57d96ab9db",
+    "calibration": {
+        "anomaly_threshold": 0.5889088797459174,
+        "calibration_data": "SYNTHETIC_NORMAL_ONLY",
+        "target_false_positive_rate": 0.05,
+        "validation_samples": 500
+    },
+    "clinical_validation": false,
+    "created_at": "2026-11-12T12:14:21.705868+00:00",
+    "data_type": "SYNTHETIC",
+    "feature_count": 4,
+    "feature_names": [
+        "heart_rate_bpm",
+        "spo2_percent",
+        "body_temperature_c",
+        "respiratory_rate_bpm"
+    ],
+    "joblib_version": "1.6.0",
+    "max_samples": 256,
+    "model_name": "ASTRA-PULSE Isolation Forest",
+    "model_type": "ISOLATION_FOREST",
+    "model_version": "v1.0.0",
+    "n_estimators": 300,
+    "numpy_version": "2.5.4",
+    "random_state": 42,
+    "scikit_learn_version": "1.9.1",
+    "target_false_positive_rate": 0.05,
+    "training_metadata": {
+        "all_data_synthetic": true,
+        "excluded_scenarios": [
+            "DATA_QUALITY_FAULT"
+        ],
+        "seed": 20261112,
+        "testing_anomaly_samples": 500,
+        "testing_emergency_samples": 500,
+        "testing_normal_samples": 500,
+        "testing_samples": 1500,
+        "testing_scenarios": [
+            "NORMAL_MISSION",
+            "HEALTH_ANOMALY",
+            "EMERGENCY_MISSION"
+        ],
+        "training_is_normal_only": true,
+        "training_samples": 2000,
+        "training_scenarios": [
+            "NORMAL_MISSION"
+        ],
+        "validation_samples": 500,
+        "validation_scenarios": [
+            "NORMAL_MISSION"
+        ]
+    }
+}

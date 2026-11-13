@@ -1,0 +1,27 @@
+﻿.venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+staticfiles/
+media/
+node_modules/
+dist/
+
+# Temporary and historical backup files
+*.bak
+*.backup
+*.before-*
+*.step*-backup
+*.step*-backup.*
+*.pre-*.bak
+
+# Historical backups using underscore suffix
+*_backup
+*.step*backup
+
+# Frontend integration snapshots
+frontend/integration_backups/
+
+# Historical before snapshots
+*.before_*
