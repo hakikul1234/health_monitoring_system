@@ -19,6 +19,7 @@ import useAuthStore from "../../stores/authStore";
 import useSimulatorStore from "./simulatorStore";
 import HabitatSimulatorPanel from "./HabitatSimulatorPanel";
 import MissionDigitalTwinPanel from "./MissionDigitalTwinPanel";
+import VirtualSensorPanel from "./VirtualSensorPanel";
 import "./SimulatorPage.css";
 
 const SCENARIOS = [
@@ -710,6 +711,8 @@ function SimulatorPage() {
           </div>
         </section>
       )}
+      <VirtualSensorPanel />
+
       <HabitatSimulatorPanel missions={missions} />
 
       <MissionDigitalTwinPanel missions={missions} />
@@ -719,3 +722,4 @@ function SimulatorPage() {
 }
 
 export default SimulatorPage;
+

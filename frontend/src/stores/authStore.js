@@ -39,6 +39,47 @@ const useAuthStore = create((set) => ({
   isLoading: false,
   error: null,
 
+  startDemoSession: async () => {
+    set({ isLoading: true, error: null });
+
+    try {
+      const sessionResponse = await api.post("/auth/demo-session/");
+      const { access, refresh } = sessionResponse.data;
+
+      if (!access || !refresh) {
+        throw new Error("Invalid Mission Control demo session response.");
+      }
+
+      tokenStorage.setTokens(access, refresh);
+
+      const userResponse = await api.get("/auth/me/");
+
+      if (userResponse.data?.role !== "MISSION_CONTROL") {
+        throw new Error("The demo session did not authenticate as Mission Control.");
+      }
+
+      set({
+        user: userResponse.data,
+        isAuthenticated: true,
+        isLoading: false,
+        error: null,
+      });
+
+      return userResponse.data;
+    } catch (error) {
+      tokenStorage.clearTokens();
+
+      set({
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        error: getErrorMessage(error),
+      });
+
+      return null;
+    }
+  },
+
   login: async (credentials) => {
     set({ isLoading: true, error: null });
 

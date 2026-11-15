@@ -6,8 +6,8 @@ import LoadingScreen from "./LoadingScreen";
 function AppInitializer({ children }) {
   const [initialized, setInitialized] = useState(false);
 
-  const fetchCurrentUser = useAuthStore(
-    (state) => state.fetchCurrentUser
+  const startDemoSession = useAuthStore(
+    (state) => state.startDemoSession
   );
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function AppInitializer({ children }) {
 
     const initialize = async () => {
       try {
-        await fetchCurrentUser();
+        await startDemoSession();
       } finally {
         if (active) {
           setInitialized(true);
@@ -28,7 +28,7 @@ function AppInitializer({ children }) {
     return () => {
       active = false;
     };
-  }, [fetchCurrentUser]);
+  }, [startDemoSession]);
 
   if (!initialized) {
     return <LoadingScreen />;

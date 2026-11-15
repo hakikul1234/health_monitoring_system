@@ -1,0 +1,233 @@
+.vs-body-card {
+  margin-top: 22px;
+  padding: 19px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(20, 34, 56, 0.96), rgba(14, 25, 43, 0.96));
+  border: 1px solid var(--vs-border, rgba(148, 163, 184, 0.17));
+  border-radius: 15px;
+}
+
+.vs-body-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.vs-body-eyebrow {
+  color: #63c9f8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.vs-body-header h3 {
+  margin: 7px 0 5px;
+  color: #eaf2ff;
+  font-size: 16px;
+}
+
+.vs-body-header p {
+  margin: 0;
+  color: #91a2bb;
+  font-size: 11px;
+}
+
+.vs-body-view-switch {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: #0a1525;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 9px;
+}
+
+.vs-body-view-switch button {
+  padding: 7px 12px;
+  color: #9fb2ca;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.vs-body-view-switch button.active {
+  color: #eaf8ff;
+  background: rgba(56, 189, 248, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.28);
+}
+
+.vs-body-stage {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(28, 95, 139, 0.25), transparent 52%),
+    linear-gradient(180deg, #0b1728, #091321);
+  border: 1px solid rgba(91, 151, 190, 0.16);
+  border-radius: 12px;
+}
+
+.vs-body-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+
+.vs-body-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 7px;
+  color: #d8eafa;
+  background: rgba(10, 28, 46, 0.94);
+  border: 1px solid rgba(91, 174, 218, 0.48);
+  border-radius: 6px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  white-space: nowrap;
+  font: 800 8px/1 system-ui, sans-serif;
+  letter-spacing: 0.45px;
+  transform: translateY(-2px);
+}
+
+.vs-body-marker.is-selected {
+  color: #ffffff;
+  background: #07577a;
+  border-color: #5de2ff;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.48);
+}
+
+.vs-body-marker-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  background: #64c8fa;
+  border-radius: 50%;
+}
+
+.vs-marker-active .vs-body-marker-dot {
+  background: #34d399;
+}
+
+.vs-marker-degraded .vs-body-marker-dot {
+  background: #fbbf24;
+}
+
+.vs-marker-disconnected .vs-body-marker-dot {
+  background: #fb7185;
+}
+
+.vs-body-canvas-hint {
+  position: absolute;
+  right: 12px;
+  bottom: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 9px;
+  color: #9db5cc;
+  background: rgba(7, 17, 30, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 7px;
+  font-size: 9px;
+  pointer-events: none;
+}
+
+.vs-body-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 13px;
+  padding: 13px;
+  background: rgba(56, 189, 248, 0.055);
+  border: 1px solid rgba(56, 189, 248, 0.14);
+  border-radius: 10px;
+}
+
+.vs-body-detail-icon {
+  display: grid;
+  width: 37px;
+  height: 37px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: #6bcafa;
+  background: rgba(56, 189, 248, 0.12);
+  border-radius: 9px;
+}
+
+.vs-body-detail-copy,
+.vs-body-sensor-status {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.vs-body-detail-copy {
+  flex: 1;
+}
+
+.vs-body-detail-copy > span,
+.vs-body-sensor-status > span {
+  color: #8fa8c1;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.vs-body-detail-copy strong,
+.vs-body-sensor-status strong {
+  color: #e7f2ff;
+  font-size: 12px;
+}
+
+.vs-body-detail-copy small,
+.vs-body-sensor-status small {
+  color: #91a2bb;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.vs-body-sensor-status {
+  max-width: 190px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.vs-body-disclaimer {
+  margin: 11px 0 0;
+  color: #8fa5bd;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+  .vs-body-card {
+    padding: 13px;
+  }
+
+  .vs-body-header {
+    flex-direction: column;
+  }
+
+  .vs-body-stage {
+    height: 390px;
+  }
+
+  .vs-body-detail {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .vs-body-sensor-status {
+    width: 100%;
+    max-width: none;
+    padding-left: 49px;
+    text-align: left;
+  }
+}

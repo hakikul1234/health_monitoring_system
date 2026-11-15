@@ -1,9 +1,14 @@
-import { create } from "zustand";
+﻿import { create } from "zustand";
 
 import {
   getSimulatorAstronauts,
   getSimulatorMissions,
   generateTelemetry,
+  getVirtualHealthSensors,
+  registerVirtualHealthSensor,
+  simulateVirtualSensor,
+  getVirtualSensorRuns,
+  evaluateReadingTrust,
 } from "./simulatorService";
 
 function getErrorMessage(error) {
@@ -40,6 +45,18 @@ const useSimulatorStore = create((set) => ({
   isLoadingOptions: false,
   isGenerating: false,
   error: null,
+
+  virtualSensors: [],
+  sensorRuns: [],
+  sensorResult: null,
+  isLoadingSensors: false,
+  isRegisteringSensor: false,
+  isRunningSensor: false,
+  sensorError: null,
+
+  trustDecision: null,
+  isEvaluatingTrust: false,
+  trustDecisionError: null,
 
   fetchSimulatorOptions: async () => {
     set({
@@ -100,6 +117,136 @@ const useSimulatorStore = create((set) => ({
 
       throw error;
     }
+  },
+
+  fetchVirtualSensors: async () => {
+    set({
+      isLoadingSensors: true,
+      sensorError: null,
+    });
+
+    try {
+      const [virtualSensors, sensorRuns] = await Promise.all([
+        getVirtualHealthSensors(),
+        getVirtualSensorRuns(),
+      ]);
+
+      set({
+        virtualSensors,
+        sensorRuns,
+        isLoadingSensors: false,
+        sensorError: null,
+      });
+
+      return { virtualSensors, sensorRuns };
+    } catch (error) {
+      set({
+        isLoadingSensors: false,
+        sensorError: getErrorMessage(error),
+      });
+
+      throw error;
+    }
+  },
+
+  registerSensor: async (payload) => {
+    set({
+      isRegisteringSensor: true,
+      sensorError: null,
+    });
+
+    try {
+      const sensor = await registerVirtualHealthSensor(payload);
+      const virtualSensors = await getVirtualHealthSensors();
+
+      set({
+        virtualSensors,
+        isRegisteringSensor: false,
+        sensorError: null,
+      });
+
+      return sensor;
+    } catch (error) {
+      set({
+        isRegisteringSensor: false,
+        sensorError: getErrorMessage(error),
+      });
+
+      throw error;
+    }
+  },
+
+  runVirtualSensorSimulation: async (sensorId, payload) => {
+    set({
+      isRunningSensor: true,
+      sensorError: null,
+      sensorResult: null,
+    });
+
+    try {
+      const result = await simulateVirtualSensor(sensorId, payload);
+      const sensorRuns = await getVirtualSensorRuns();
+
+      set({
+        sensorResult: result,
+        sensorRuns,
+        isRunningSensor: false,
+        sensorError: null,
+      });
+
+      return result;
+    } catch (error) {
+      set({
+        isRunningSensor: false,
+        sensorError: getErrorMessage(error),
+      });
+
+      throw error;
+    }
+  },
+
+  evaluateReadingTrust: async (payload) => {
+    set({
+      isEvaluatingTrust: true,
+      trustDecision: null,
+      trustDecisionError: null,
+    });
+
+    try {
+      const result = await evaluateReadingTrust(payload);
+
+      set({
+        trustDecision: result,
+        isEvaluatingTrust: false,
+        trustDecisionError: null,
+      });
+
+      return result;
+    } catch (error) {
+      const message = getErrorMessage(error);
+
+      set({
+        isEvaluatingTrust: false,
+        trustDecisionError: message,
+      });
+
+      throw error;
+    }
+  },
+
+  clearTrustDecision: () => {
+    set({
+      trustDecision: null,
+      trustDecisionError: null,
+      isEvaluatingTrust: false,
+    });
+  },
+
+  clearSensorResult: () => {
+    set({
+      sensorResult: null,
+      sensorError: null,
+    });
   },
 
   clearGenerationResult: () => {
